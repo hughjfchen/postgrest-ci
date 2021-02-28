@@ -35,7 +35,11 @@ rec {
       #ghc = pkgs.buildPackages.pkgs.haskell-nix.compiler.${haskellCompiler};
       modules = [
 	{ packages.postgresql-libpq.flags.use-pkg-config = true; }
-	{ packages.postgrest.configureFlags = [ "--ghc-option=-optl=-L${pkgs.postgresql.lib}/lib" ]; }
+	{ packages.postgrest.configureFlags = [ 
+		"--ghc-option=-optl=-lssl" 
+		"--ghc-option=-optl=-lcrypto" 
+		"--ghc-option=-optl=-L${pkgs.openssl.out}/lib" 
+	]; }
         { packages.postgrest.dontStrip = false; }
       ];
     });

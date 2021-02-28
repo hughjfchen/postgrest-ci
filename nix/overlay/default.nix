@@ -5,4 +5,6 @@ rec
     configureFlags = [ "--disable-examples-build" ]; }));
   postgresql = (prev.postgresql.overrideAttrs (oldAttrs: { dontDisableStatic = true; })).override { enableSystemd = false; };
   libpq = postgresql;
+  libcrypto = openssl.dev;
+  libssl = openssl.dev;
 }
